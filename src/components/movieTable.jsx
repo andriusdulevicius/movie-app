@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
-// import { getMovies, getMovie } from './services/fakeMovieService';
+import { getMovies } from '../services/fakeMovieService';
 
 class MovieTable extends Component {
-  state = {};
+  state = {
+    movies: getMovies(),
+  };
 
   render() {
-    return <h3>Movie table is here</h3>;
+    return (
+      <div>
+        <h3>Movie table is here</h3>
+        <ol>
+          {this.state.movies.map((movie) => (
+            <li key={movie._id}>{movie.title}</li>
+          ))}
+        </ol>
+      </div>
+    );
   }
 }
 
