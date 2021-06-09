@@ -1,8 +1,8 @@
 import './App.css';
-import MovieTable from './components/MovieTable';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Aside from './components/Aside';
+import MovieTable from './components/movieTable';
+import Header from './components/header';
+import Footer from './components/footer';
+import Aside from './components/aside';
 
 function App() {
   return (
