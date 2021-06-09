@@ -2,12 +2,16 @@ import './App.css';
 import MovieTable from './components/MovieTable';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Aside from './components/Aside';
 
 function App() {
   return (
-    <div className='App'>
+    <div className='App '>
       <Header />
-      <MovieTable />
+      <div className='d-flex container main-section'>
+        <MovieTable />
+        <Aside />
+      </div>
       <Footer />
     </div>
   );

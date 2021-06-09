@@ -1,0 +1,12 @@
+.aside-flex-basis {
+  flex-basis: 40%;
+  padding-left: 20px;
+}
+
+.movie-table {
+  flex-basis: 60%;
+}
+
+.main-section {
+  margin: 0 auto;
+}

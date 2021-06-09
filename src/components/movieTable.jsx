@@ -7,10 +7,12 @@ class MovieTable extends Component {
   };
 
   render() {
+    const { movies: mv } = this.state;
+    if (mv.length === 0) return <div className='alert alert-warning'> There are no movies on sale at the moment.</div>;
     return (
-      <div>
+      <div className='movie-table'>
         <h3> Please see our movies:</h3>
-        <p>Showing {this.state.movies.length} movies in our store</p>
+        <p>Showing {mv.length} movies in our store</p>
         <table className='table'>
           <thead>
             <tr>
@@ -45,8 +47,7 @@ class MovieTable extends Component {
   }
 
   deleteMovie(id) {
-    const filtered = this.setState({ count: getMovies().filter((m) => m._id !== id) });
-    return filtered;
+    this.setState({ movies: this.state.movies.filter((m) => m._id !== id) });
   }
 }
 
