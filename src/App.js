@@ -1,11 +1,14 @@
 import './App.css';
-import MovieTable from './components/movieTable';
+import MovieTable from './components/MovieTable';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <div className='App'>
-      <h2>Movie App</h2>
+      <Header />
       <MovieTable />
+      <Footer />
     </div>
   );
 }
