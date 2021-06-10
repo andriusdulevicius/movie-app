@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getMovies } from '../services/fakeMovieService';
+import TableRow from './tableRow';
 
 class MovieTable extends Component {
   state = {
@@ -23,27 +24,14 @@ class MovieTable extends Component {
               <th scope='col'>Delete</th>
             </tr>
           </thead>
-          <tbody>{this.generateTableBody()}</tbody>
+          <tbody>
+            {this.state.movies.map((movie) => (
+              <TableRow key={movie._id} movie={movie} onDelete={() => this.deleteMovie(movie._id)} />
+            ))}
+          </tbody>
         </table>
       </div>
     );
-  }
-
-  generateTableBody() {
-    const res = this.state.movies.map((movie) => (
-      <tr key={movie._id}>
-        <td>{movie.title}</td>
-        <td>{movie.dailyRentalRate}</td>
-        <td>{movie.numberInStock}</td>
-        <td>{movie.genre.name}</td>
-        <td>
-          <button onClick={() => this.deleteMovie(movie._id)} className='btn btn-danger'>
-            X
-          </button>
-        </td>
-      </tr>
-    ));
-    return res;
   }
 
   deleteMovie(id) {
