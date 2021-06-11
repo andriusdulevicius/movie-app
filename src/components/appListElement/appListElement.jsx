@@ -10,8 +10,8 @@ class AppListElement extends Component {
       <li className='li-el app-todo-el'>
         <i className={classes} onClick={() => this.props.onToggle(todo.id)}></i>
         <span className={titleClass}>{todo.title}</span>
-        <i className='fa fa-pencil'></i>
-        <i className='fa fa-trash'></i>
+        <i className='fa fa-pencil' onClick={() => this.props.onEdit(todo.id)}></i>
+        <i className='fa fa-trash' onClick={() => this.props.onDelete(todo.id)}></i>
       </li>
     );
   }

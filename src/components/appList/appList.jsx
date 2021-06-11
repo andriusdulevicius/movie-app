@@ -7,7 +7,13 @@ class AppList extends Component {
     return (
       <ul className='todo-list'>
         {this.props.todos.map((todo) => (
-          <AppListElement key={todo.id} todo={todo} onToggle={this.props.onToggle} />
+          <AppListElement
+            key={todo.id}
+            todo={todo}
+            onToggle={this.props.onToggle}
+            onDelete={this.props.onDelete}
+            onEdit={this.props.onEdit}
+          />
         ))}
       </ul>
     );
