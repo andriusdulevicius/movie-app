@@ -15,7 +15,11 @@ img {
 /* App.js */
 
 .app {
-  padding-top: 50px;
-  max-width: 80%;
-  margin: 0 auto;
+  max-width: 500px;
+  width: 80%;
+  margin: 7% auto;
+  padding: 1em;
+  border-radius: 1em;
+  border: 1px solid #000;
+  overflow: hidden;
 }
