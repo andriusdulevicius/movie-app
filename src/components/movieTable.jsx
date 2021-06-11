@@ -26,7 +26,7 @@ class MovieTable extends Component {
           </thead>
           <tbody>
             {this.state.movies.map((movie) => (
-              <TableRow key={movie._id} movie={movie} onDelete={() => this.deleteMovie(movie._id)} />
+              <TableRow key={movie._id} movie={movie} onDelete={this.deleteMovie} />
             ))}
           </tbody>
         </table>
@@ -34,9 +34,9 @@ class MovieTable extends Component {
     );
   }
 
-  deleteMovie(id) {
+  deleteMovie = (id) => {
     this.setState({ movies: this.state.movies.filter((m) => m._id !== id) });
-  }
+  };
 }
 
 export default MovieTable;

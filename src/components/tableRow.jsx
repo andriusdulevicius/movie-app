@@ -10,7 +10,7 @@ class TableRow extends Component {
         <td>{movie.numberInStock}</td>
         <td>{movie.genre.name}</td>
         <td>
-          <button onClick={this.props.onDelete} className='btn btn-danger'>
+          <button onClick={() => this.props.onDelete(movie._id)} className='btn btn-danger'>
             X
           </button>
         </td>
