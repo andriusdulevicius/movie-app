@@ -17,11 +17,18 @@ class App extends Component {
       { id: 4, isDone: false, title: 'Learn React' },
     ],
   };
+
+  checkToggle = (id) => {
+    if (this.state.todos.id === id) {
+      const statusToggle = !this.state.todos.isDone;
+      this.setState({ isDone: statusToggle });
+    }
+  };
   render() {
     return (
       <div className='app'>
         <AppHeader />
-        <AppList todos={this.state.todos} />
+        <AppList todos={this.state.todos} onToggle={this.checkToggle} />
         <AppAddTodo />
       </div>
     );
