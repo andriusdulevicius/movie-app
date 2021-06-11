@@ -11,7 +11,7 @@ class AppHeader extends Component {
 
     setInterval(() => {
       now = new Date();
-      let laikas = now.toLocaleTimeString();
+      let laikas = now.toLocaleString();
       return laikas;
     }, 1000);
     return data;
