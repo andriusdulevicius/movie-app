@@ -16,45 +16,42 @@ class App extends Component {
 
       { id: 4, isDone: false, title: 'Learn React', isEditOn: false },
     ],
+    currentId: 4,
   };
 
   checkToggle = (id) => {
     const todos = [...this.state.todos];
     const found = todos.find((t) => t.id === id);
     found.isDone = !found.isDone;
+    //todos apacioje yra todos: todos
     this.setState({ todos });
   };
 
   handleDelete = (id) => {
-    console.log('deleted', id);
-    const todos = [...this.state.todos];
-    const found = todos.find((t) => t.id === id);
-    console.log(todos.indexOf(found));
-    todos.splice(todos.indexOf(found), 1);
-    this.setState({ todos });
+    // console.log('deleted', id);
+    // const todos = [...this.state.todos];
+    // const found = todos.find((t) => t.id === id);
+    // console.log(todos.indexOf(found));
+    // todos.splice(todos.indexOf(found), 1);
+    // this.setState({ todos });
     //arba
-    // const filtered = this.state.todos.filter((td) => td.id === id);
-    // this.setState({ filtered });
+    const filtered = this.state.todos.filter((td) => td.id !== id);
+    this.setState({ todos: filtered });
   };
 
-  handleEdit = (id) => {
-    const todos = [...this.state.todos];
-    const found = todos.find((t) => t.id === id);
-    found.title = `<input value=${found.title}>`;
-    this.setState({ todos });
+  handleAddTodo = (todoTitle) => {
+    const todosCopy = [...this.state.todos];
+    const newTodoObj = { id: 1 + this.state.currentId, isDone: false, title: todoTitle, isEditOn: false };
+    todosCopy.push(newTodoObj);
+    this.setState({ todos: todosCopy, currentId: 1 + this.state.currentId });
   };
 
   render() {
     return (
       <div className='app'>
         <AppHeader />
-        <AppList
-          todos={this.state.todos}
-          onToggle={this.checkToggle}
-          onDelete={this.handleDelete}
-          onEdit={this.handleEdit}
-        />
-        <AppAddTodo />
+        <AppList todos={this.state.todos} onToggle={this.checkToggle} onDelete={this.handleDelete} />
+        <AppAddTodo key={this.state.todos.id} onClickAddTodo={this.handleAddTodo} />
       </div>
     );
   }

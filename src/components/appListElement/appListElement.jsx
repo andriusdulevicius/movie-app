@@ -2,15 +2,29 @@ import React, { Component } from 'react';
 import './style.css';
 
 class AppListElement extends Component {
+  state = {
+    editTitle: this.props.todo.title,
+  };
+
+  handleChange = (event) => {
+    this.setState({ editTitle: event.target.value });
+  };
+
   render() {
     const { todo } = this.props;
-    let classes = todo.isDone ? 'fa fa-check-circle' : 'fa fa-circle-thin';
     let titleClass = todo.isDone ? 'done-title' : '';
+    const spanOrTodo = todo.isEditOn ? (
+      <input type='text' value={this.state.editTitle} onChange={this.handleChange} />
+    ) : (
+      <span className={titleClass}>{todo.title}</span>
+    );
+
+    let classes = todo.isDone ? 'fa fa-check-circle' : 'fa fa-circle-thin';
     return (
       <li className='li-el app-todo-el'>
         <i className={classes} onClick={() => this.props.onToggle(todo.id)}></i>
-        <span className={titleClass}>{todo.title}</span>
-        <i className='fa fa-pencil' onClick={() => this.props.onEdit(todo.id)}></i>
+        {spanOrTodo}
+        <i className='fa fa-pencil' onClick={() => }></i>
         <i className='fa fa-trash' onClick={() => this.props.onDelete(todo.id)}></i>
       </li>
     );
