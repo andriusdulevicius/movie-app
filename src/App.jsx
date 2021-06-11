@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div className='app'>
         <AppHeader />
-        <AppList />
+        <AppList todos={this.state.todos} />
         <AppAddTodo />
       </div>
     );

@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+import './style.css';
+import AppListElement from '../appListElement/appListElement';
 
 class AppList extends Component {
   render() {
-    return <h2>I am app List</h2>;
+    return (
+      <ul className='todo-list'>
+        {this.props.todos.map((todo) => (
+          <AppListElement key={todo.id} todo={todo} />
+        ))}
+      </ul>
+    );
   }
 }
 
