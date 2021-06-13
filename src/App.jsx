@@ -8,13 +8,13 @@ import './app.css';
 class App extends Component {
   state = {
     todos: [
-      { id: 1, isDone: false, title: 'Buy Milk', isEditOn: false },
+      { id: 1, isDone: false, isFavourite: false, title: 'Buy Milk', isEditOn: false },
 
-      { id: 2, isDone: true, title: 'Buy Tv', isEditOn: false },
+      { id: 2, isDone: true, isFavourite: false, title: 'Buy Tv', isEditOn: false },
 
-      { id: 3, isDone: false, title: 'Go to Park', isEditOn: false },
+      { id: 3, isDone: false, isFavourite: false, title: 'Go to Park', isEditOn: false },
 
-      { id: 4, isDone: false, title: 'Learn React', isEditOn: false },
+      { id: 4, isDone: false, isFavourite: false, title: 'Learn React', isEditOn: false },
     ],
     currentId: 4,
   };
@@ -23,6 +23,14 @@ class App extends Component {
     const todos = [...this.state.todos];
     const found = todos.find((t) => t.id === id);
     found.isDone = !found.isDone;
+    //todos apacioje yra todos: todos
+    this.setState({ todos });
+  };
+
+  checkFavToggle = (id) => {
+    const todos = [...this.state.todos];
+    const found = todos.find((t) => t.id === id);
+    found.isFavourite = !found.isFavourite;
     //todos apacioje yra todos: todos
     this.setState({ todos });
   };
@@ -46,11 +54,26 @@ class App extends Component {
     this.setState({ todos: todosCopy, currentId: 1 + this.state.currentId });
   };
 
+  toggleEditStatus = (id, newTitle) => {
+    const todos = [...this.state.todos];
+    const found = todos.find((t) => t.id === id);
+    found.isEditOn = !found.isEditOn;
+    found.title = newTitle;
+    //todos apacioje yra todos: todos
+    this.setState({ todos });
+  };
+
   render() {
     return (
       <div className='app'>
         <AppHeader />
-        <AppList todos={this.state.todos} onToggle={this.checkToggle} onDelete={this.handleDelete} />
+        <AppList
+          todos={this.state.todos}
+          onToggle={this.checkToggle}
+          onFavToggle={this.checkFavToggle}
+          onDelete={this.handleDelete}
+          onToggleEditStatus={this.toggleEditStatus}
+        />
         <AppAddTodo key={this.state.todos.id} onClickAddTodo={this.handleAddTodo} />
       </div>
     );
