@@ -9,12 +9,14 @@ class AppListElement extends Component {
   handleChange = (event) => {
     this.setState({ editTitle: event.target.value });
   };
-
+  handleEnter = (event) => {
+    event.keyCode === 13 && this.props.onToggleEditStatus(this.props.todo.id, this.state.editTitle);
+  };
   render() {
     const { todo } = this.props;
     let titleClass = todo.isDone ? 'done-title' : '';
     const spanOrTodo = todo.isEditOn ? (
-      <input type='text' value={this.state.editTitle} onChange={this.handleChange} />
+      <input type='text' value={this.state.editTitle} onChange={this.handleChange} onKeyDown={this.handleEnter} />
     ) : (
       <span className={titleClass}>{todo.title}</span>
     );

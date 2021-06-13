@@ -24,9 +24,10 @@ class App extends Component {
     const found = todos.find((t) => t.id === id);
     found.isDone = !found.isDone;
     //todos apacioje yra todos: todos
-    this.setState({ todos });
+    this.setState({ todos: todos });
   };
 
+  C;
   checkFavToggle = (id) => {
     const todos = [...this.state.todos];
     const found = todos.find((t) => t.id === id);
@@ -49,9 +50,10 @@ class App extends Component {
 
   handleAddTodo = (todoTitle) => {
     const todosCopy = [...this.state.todos];
-    const newTodoObj = { id: 1 + this.state.currentId, isDone: false, title: todoTitle, isEditOn: false };
+    const newCurrentId = 1 + this.state.currentId;
+    const newTodoObj = { id: newCurrentId, isDone: false, title: todoTitle, isEditOn: false };
     todosCopy.push(newTodoObj);
-    this.setState({ todos: todosCopy, currentId: 1 + this.state.currentId });
+    this.setState({ todos: todosCopy, currentId: newCurrentId });
   };
 
   toggleEditStatus = (id, newTitle) => {
