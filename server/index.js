@@ -7,6 +7,10 @@ const { mongoDbString } = require('./config/config');
 
 const PORT = 3002;
 
+//middleware
+//leidzia is req body issitraukti json formata
+app.use(express.json());
+
 const todoApi = require('./api/todoApi');
 
 app.use('/', todoApi);
