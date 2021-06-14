@@ -1,14 +1,20 @@
 const express = require('express');
 const router = express.Router();
+const Todo = require('../models/todo');
 
 router.get('/api/todos', (req, res) => {
-  res.json({ msg: 'All Todos' });
+  Todo.find()
+    .then((result) => res.json(result))
+    .catch((err) => res.status(500).json({ success: false, err }));
 });
 
 router.post('/api/todos/new', (req, res) => {
-  console.log('post gautas body', req.body);
+  const newTodo = new Todo(req.body);
 
-  res.json({ success: true, body: req.body });
+  newTodo
+    .save()
+    .then((result) => res.json({ success: true, result }))
+    .catch((err) => res.status(500).json({ success: false, err }));
 });
 
 module.exports = router;
