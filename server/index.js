@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
 const mongoose = require('mongoose');
 
@@ -7,6 +8,7 @@ const { mongoDbString } = require('./config/config');
 
 const PORT = 3002;
 
+app.use(cors());
 //middleware
 //leidzia is req body issitraukti json formata
 app.use(express.json());

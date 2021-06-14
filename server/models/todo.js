@@ -34,7 +34,7 @@ const todoSchema = new Schema(
 
 //eksportuoti naujai sukurta objekta pagal sia schema
 // dazniausiai turetu buti todo vienaskaitai , jei kolekcijos pavadinimas todos
-const todo = mongoose.model('todo', todoSchema);
+const Todo = mongoose.model('Todo', todoSchema);
 //sukurem todo modeli pagal todoSchema
 
-module.exports = todo;
+module.exports = Todo;
