@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GetSendData from '../service/getSendData';
 
 class FetchTest extends Component {
   state = {
@@ -22,8 +23,8 @@ class FetchTest extends Component {
     })
       .then((resp) => resp.json())
       .then((res) => {
-        console.log(res);
         this.getAllTodos();
+        this.setState({ todoTitle: '' });
       })
       .catch((err) => console.log(err));
   };
@@ -33,12 +34,9 @@ class FetchTest extends Component {
   }
 
   getAllTodos = () => {
-    fetch('http://localhost:3002/api/todos/')
-      .then((resp) => resp.json())
-      .then((res) => {
-        this.setState({ todos: res });
-      })
-      .catch((err) => console.log(err));
+    GetSendData.getAllTodos((res) => {
+      this.setState({ todos: res });
+    });
   };
 
   render() {
