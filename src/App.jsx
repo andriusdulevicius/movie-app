@@ -17,6 +17,7 @@ class App extends Component {
       { id: 4, isDone: false, isFavourite: false, title: 'Learn React', isEditOn: false },
     ],
     currentId: 4,
+    isWarning: false,
   };
 
   checkToggle = (id) => {
@@ -37,18 +38,23 @@ class App extends Component {
   };
 
   handleDelete = (id) => {
+    const filtered = this.state.todos.filter((td) => td.id !== id);
+    this.setState({ todos: filtered });
+    //arba
     // console.log('deleted', id);
     // const todos = [...this.state.todos];
     // const found = todos.find((t) => t.id === id);
     // console.log(todos.indexOf(found));
     // todos.splice(todos.indexOf(found), 1);
     // this.setState({ todos });
-    //arba
-    const filtered = this.state.todos.filter((td) => td.id !== id);
-    this.setState({ todos: filtered });
   };
 
   handleAddTodo = (todoTitle) => {
+    if (todoTitle === '') {
+      const warning = !this.state.isWarning;
+      this.setState({ isWarning: warning });
+      return;
+    }
     const todosCopy = [...this.state.todos];
     const newCurrentId = 1 + this.state.currentId;
     const newTodoObj = { id: newCurrentId, isDone: false, title: todoTitle, isEditOn: false };
@@ -57,12 +63,21 @@ class App extends Component {
   };
 
   toggleEdit = (id, newTitle) => {
+    if (newTitle === '') {
+      const warning = !this.state.isWarning;
+      this.setState({ isWarning: warning });
+      return;
+    }
     const todos = [...this.state.todos];
     const found = todos.find((t) => t.id === id);
     found.isEditOn = !found.isEditOn;
     found.title = newTitle;
     //todos apacioje yra todos: todos
     this.setState({ todos });
+  };
+
+  showWarning = () => {
+    return this.state.isWarning ? 'warning-message warning-db' : 'warning-message';
   };
 
   render() {
@@ -77,6 +92,9 @@ class App extends Component {
           onToggleEdit={this.toggleEdit}
         />
         <AppAddTodo key={this.state.todos.id} onClickAddTodo={this.handleAddTodo} />
+        <div className={this.showWarning()}>
+          <h4>Please enter some text into your todo! </h4>
+        </div>
       </div>
     );
   }
