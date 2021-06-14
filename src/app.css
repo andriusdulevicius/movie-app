@@ -38,3 +38,7 @@ img {
 .warning-db {
   display: block;
 }
+
+.d-none {
+  display: none;
+}

@@ -20,15 +20,25 @@ class App extends Component {
     isWarning: false,
   };
 
+  componentDidMount() {
+    this.sortTodos();
+  }
+
+  sortTodos() {
+    const todos = [...this.state.todos];
+    //sorting todos
+    todos.sort((a, b) => a.isDone - b.isDone);
+    this.setState({ todos });
+  }
+
   checkToggle = (id) => {
     const todos = [...this.state.todos];
     const found = todos.find((t) => t.id === id);
     found.isDone = !found.isDone;
-    //todos apacioje yra todos: todos
-    this.setState({ todos: todos });
+
+    this.sortTodos();
   };
 
-  C;
   checkFavToggle = (id) => {
     const todos = [...this.state.todos];
     const found = todos.find((t) => t.id === id);
@@ -58,7 +68,7 @@ class App extends Component {
     const todosCopy = [...this.state.todos];
     const newCurrentId = 1 + this.state.currentId;
     const newTodoObj = { id: newCurrentId, isDone: false, title: todoTitle, isEditOn: false };
-    todosCopy.push(newTodoObj);
+    todosCopy.unshift(newTodoObj);
     this.setState({ todos: todosCopy, currentId: newCurrentId });
   };
 
@@ -70,8 +80,8 @@ class App extends Component {
     }
     const todos = [...this.state.todos];
     const found = todos.find((t) => t.id === id);
+    if (found.isEditOn) found.title = newTitle;
     found.isEditOn = !found.isEditOn;
-    found.title = newTitle;
     //todos apacioje yra todos: todos
     this.setState({ todos });
   };

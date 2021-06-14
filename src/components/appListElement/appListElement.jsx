@@ -28,7 +28,12 @@ class AppListElement extends Component {
         <i className={classes} onClick={() => onToggle(todo.id)}></i>
         <FavouriteTodo onFavToggle={onFavToggle} todo={todo} />
         {spanOrTodo}
-        <i className='fa fa-pencil' onClick={() => onToggleEdit(todo.id, this.state.editTitle)}></i>
+        {todo.isDone ? (
+          ''
+        ) : (
+          <i className='fa fa-pencil' onClick={() => onToggleEdit(todo.id, this.state.editTitle)}></i>
+        )}
+
         <i className='fa fa-trash' onClick={() => onDelete(todo.id)}></i>
       </li>
     );
