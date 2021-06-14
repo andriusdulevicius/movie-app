@@ -10,5 +10,20 @@ export default class GetSendData {
       .catch((err) => console.log(err));
   }
 
-  static;
+  static addNewTodo(title, successCallBack) {
+    const newTodo = { title: title };
+    fetch(GetSendData.todoApiUrl + '/new', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTodo),
+    })
+      .then((resp) => resp.json())
+      .then((res) => {
+        successCallBack(res);
+      })
+      .catch((err) => console.log(err));
+  }
 }

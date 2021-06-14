@@ -12,21 +12,10 @@ class FetchTest extends Component {
   };
 
   handleNewTodo = () => {
-    const newTodo = { title: this.state.todoTitle };
-    fetch('http://localhost:3002/api/todos/new', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newTodo),
-    })
-      .then((resp) => resp.json())
-      .then((res) => {
-        this.getAllTodos();
-        this.setState({ todoTitle: '' });
-      })
-      .catch((err) => console.log(err));
+    GetSendData.addNewTodo(this.state.todoTitle, () => {
+      this.getAllTodos();
+      this.setState({ todoTitle: '' });
+    });
   };
 
   componentDidMount() {
@@ -35,7 +24,7 @@ class FetchTest extends Component {
 
   getAllTodos = () => {
     GetSendData.getAllTodos((res) => {
-      this.setState({ todos: res });
+      this.setState({ todos: res, todoTitle: '' });
     });
   };
 
@@ -43,7 +32,7 @@ class FetchTest extends Component {
     return (
       <div>
         <h1>Fetch test</h1>
-        <input onChange={this.syncTitle} type='text' placeholder='add new todo' />
+        <input value={this.state.todoTitle} onChange={this.syncTitle} type='text' placeholder='add new todo' />
         <button onClick={this.handleNewTodo}>Add todo </button>
 
         <ul>
