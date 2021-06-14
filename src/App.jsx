@@ -56,7 +56,7 @@ class App extends Component {
     this.setState({ todos: todosCopy, currentId: newCurrentId });
   };
 
-  toggleEditStatus = (id, newTitle) => {
+  toggleEdit = (id, newTitle) => {
     const todos = [...this.state.todos];
     const found = todos.find((t) => t.id === id);
     found.isEditOn = !found.isEditOn;
@@ -74,7 +74,7 @@ class App extends Component {
           onToggle={this.checkToggle}
           onFavToggle={this.checkFavToggle}
           onDelete={this.handleDelete}
-          onToggleEditStatus={this.toggleEditStatus}
+          onToggleEdit={this.toggleEdit}
         />
         <AppAddTodo key={this.state.todos.id} onClickAddTodo={this.handleAddTodo} />
       </div>

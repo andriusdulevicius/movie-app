@@ -13,7 +13,7 @@ class AppList extends Component {
             onToggle={this.props.onToggle}
             onFavToggle={this.props.onFavToggle}
             onDelete={this.props.onDelete}
-            onToggleEditStatus={this.props.onToggleEditStatus}
+            onToggleEdit={this.props.onToggleEdit}
           />
         ))}
       </ul>

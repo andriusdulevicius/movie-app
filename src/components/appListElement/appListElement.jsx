@@ -10,10 +10,10 @@ class AppListElement extends Component {
     this.setState({ editTitle: event.target.value });
   };
   handleEnter = (event) => {
-    event.keyCode === 13 && this.props.onToggleEditStatus(this.props.todo.id, this.state.editTitle);
+    event.keyCode === 13 && this.props.onToggleEdit(this.props.todo.id, this.state.editTitle);
   };
   render() {
-    const { todo } = this.props;
+    const { todo, onToggle, onToggleEdit, onDelete, onFavToggle } = this.props;
     let titleClass = todo.isDone ? 'done-title' : '';
     const spanOrTodo = todo.isEditOn ? (
       <input type='text' value={this.state.editTitle} onChange={this.handleChange} onKeyDown={this.handleEnter} />
@@ -25,11 +25,11 @@ class AppListElement extends Component {
 
     return (
       <li className='li-el app-todo-el'>
-        <i className={classes} onClick={() => this.props.onToggle(todo.id)}></i>
-        <FavouriteTodo onFavToggle={this.props.onFavToggle} todo={todo} />
+        <i className={classes} onClick={() => onToggle(todo.id)}></i>
+        <FavouriteTodo onFavToggle={onFavToggle} todo={todo} />
         {spanOrTodo}
-        <i className='fa fa-pencil' onClick={() => this.props.onToggleEditStatus(todo.id, this.state.editTitle)}></i>
-        <i className='fa fa-trash' onClick={() => this.props.onDelete(todo.id)}></i>
+        <i className='fa fa-pencil' onClick={() => onToggleEdit(todo.id, this.state.editTitle)}></i>
+        <i className='fa fa-trash' onClick={() => onDelete(todo.id)}></i>
       </li>
     );
   }
