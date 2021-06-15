@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 //importuojam modulini individualu css
 import navStyles from './navbar.module.css';
 
@@ -7,22 +9,22 @@ class Navbar extends Component {
   render() {
     return (
       <nav className={navStyles.navbar}>
-        <a className='logo' href='/'>
+        <Link className='logo' to='/'>
           ReactApp
-        </a>
+        </Link>
         <div className='nav-links'>
-          <a className={navStyles.navLink} href='/'>
+          <Link className={navStyles.navLink} to='/'>
             Home
-          </a>
-          <a className={navStyles.navLink} href='/about'>
+          </Link>
+          <Link className={navStyles.navLink} to='/about'>
             About
-          </a>
-          <a className={navStyles.navLink} href='/todos'>
+          </Link>
+          <Link className={navStyles.navLink} to='/todos'>
             Todos
-          </a>
-          <a className={navStyles.navLink} href='/contact'>
+          </Link>
+          <Link className={navStyles.navLink} to='/contact'>
             Contact
-          </a>
+          </Link>
         </div>
       </nav>
     );

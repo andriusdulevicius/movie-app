@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router';
 import TodoPage from './components/todoPage/todoPage';
 import Navbar from './components/navbar/navbar';
+import ContactPage from './components/pages/contact';
+import AboutPage from './components/pages/about';
+import HomePage from './components/pages/homePage';
 
 //app styles
 import './app.css';
@@ -11,7 +15,14 @@ class App extends Component {
     return (
       <div className='app'>
         <Navbar />
-        <TodoPage />
+        <div className='container'>
+          <Switch>
+            <Route path='/todos' component={TodoPage}></Route>
+            <Route path='/about' component={AboutPage}></Route>
+            <Route path='/contact' component={ContactPage}></Route>
+            <Route path='/' component={HomePage}></Route>
+          </Switch>
+        </div>
       </div>
     );
   }

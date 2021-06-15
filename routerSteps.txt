@@ -1,7 +1,7 @@
 1. npm i react-router-dom
 
 2.ikelti routeri i index.js
-import {BrowserRouter} from 'react-router-dom'
+import {BrowserRouter} from 'react-router-dom';
 
 apvyniojam App: (jis paduoda narsykles istorijos objekta i App )
 
@@ -10,3 +10,55 @@ apvyniojam App: (jis paduoda narsykles istorijos objekta i App )
     <App />
     </BrowserRouter>
   </React.StrictMode>,
+
+
+
+  3. Main componente / App.js faile : 
+import React, { Component } from 'react';
+import { Route, Switch  } from 'react-router';
+import TodoPage from './components/todoPage/todoPage';
+import Navbar from './components/navbar/navbar';
+import ContactPage from './components/pages/contact';
+import AboutPage from './components/pages/about';
+import HomePage from './components/pages/homePage';
+
+
+class App extends Component {
+  state = {};
+  render() {
+    return (
+      <div className='app'>
+        <Navbar />
+        <div className='container'>
+          <Switch>
+            <Route path='/todos' component={TodoPage}></Route>
+            <Route path='/about' component={AboutPage}></Route>
+            <Route path='/contact' component={ContactPage}></Route>
+            <Route path='/' component={HomePage}></Route>
+          </Switch>
+        </div>
+      </div>
+    );
+  }
+}
+
+jei Switch componento neikeliam , galima nurodyti ties path=/ zody exact,  kad vienodai pavadintu pathu nekrautu
+
+SVARBI eiles tvarka, nes home / nuoroda idejus auksciau ja pirma ras , ir pirma uzkraus, todel ji turi buti paskutine
+
+
+4.Padaryti , kad nepersikrautu puslapis paspaudus linko nuorodas. 
+
+Tai navbar.jsx faile , importuojam : 
+
+import { Link } from 'react-router-dom';
+
+ir pakeiciam a linkus i Link'us , o href i 'to' :
+
+pvz:
+<Link className={navStyles.navLink} to='/contact'>
+            Contact
+          </Link>
+
+
+Tuomet vaikstant per linkus, svetaine nepersikraudines
