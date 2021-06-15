@@ -5,7 +5,7 @@ class FavouriteTodo extends Component {
     const { todo } = this.props;
     let favClasses = todo.isFavourite ? 'fa fa-star' : 'fa fa-star-o';
 
-    return <i className={favClasses} onClick={() => this.props.onFavToggle(todo.id)}></i>;
+    return <i className={favClasses} onClick={() => this.props.onFavToggle(todo._id, todo.isFavourite)}></i>;
   }
 }
 

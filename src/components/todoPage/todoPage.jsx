@@ -24,30 +24,18 @@ class TodoPage extends Component {
 
   componentDidMount() {
     this.getAllTodos();
-    this.sortTodos();
   }
 
-  sortTodos() {
-    const todos = [...this.state.todos];
-    //sorting todos
-    todos.sort((a, b) => a.isDone - b.isDone);
-    this.setState({ todos });
-  }
-
-  checkToggle = (id) => {
-    const todos = [...this.state.todos];
-    const found = todos.find((t) => t._id === id);
-    found.isDone = !found.isDone;
-
-    this.sortTodos();
+  checkToggle = (id, doneStatus) => {
+    GetSendData.checkTodo(id, doneStatus, () => {
+      this.getAllTodos();
+    });
   };
 
-  checkFavToggle = (id) => {
-    const todos = [...this.state.todos];
-    const found = todos.find((t) => t._id === id);
-    found.isFavourite = !found.isFavourite;
-    //todos apacioje yra todos: todos
-    this.setState({ todos });
+  checkFavToggle = (id, favStatus) => {
+    GetSendData.checkFavTodo(id, favStatus, () => {
+      this.getAllTodos();
+    });
   };
 
   handleDelete = (id) => {
@@ -58,8 +46,7 @@ class TodoPage extends Component {
 
   getAllTodos = () => {
     GetSendData.getAllTodos((result) => {
-      console.log(result);
-      this.setState({ todos: result });
+      this.setState({ todos: result.sort((a, b) => a.isDone - b.isDone) });
     });
   };
 

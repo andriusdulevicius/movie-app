@@ -22,5 +22,18 @@ router.delete('/api/todos/:id', (req, res) => {
     .then((result) => res.json(result))
     .catch((err) => res.status(500).json({ success: false, err }));
 });
+router.patch('/api/todos/:id', (req, res) => {
+  const doneStatus = req.body.isDone;
+
+  Todo.findByIdAndUpdate(req.params.id, { isDone: doneStatus })
+    .then((result) => res.json(result))
+    .catch((err) => res.status(500).json({ success: false, err }));
+});
+router.patch('/api/todos/:id', (req, res) => {
+  const favStatus = req.body.isFavourite;
+  Todo.findByIdAndUpdate(req.params.id, { isFavourite: favStatus })
+    .then((result) => res.json(result))
+    .catch((err) => res.status(500).json({ success: false, err }));
+});
 
 module.exports = router;

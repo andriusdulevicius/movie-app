@@ -25,7 +25,7 @@ class AppListElement extends Component {
 
     return (
       <li className='li-el app-todo-el'>
-        <i className={classes} onClick={() => onToggle(todo._id)}></i>
+        <i className={classes} onClick={() => onToggle(todo._id, todo.isDone)}></i>
         <FavouriteTodo onFavToggle={onFavToggle} todo={todo} />
         {spanOrTodo}
         {todo.isDone ? (
