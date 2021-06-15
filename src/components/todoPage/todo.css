@@ -1,0 +1,30 @@
+/* App.js */
+
+.todo-page {
+  max-width: 500px;
+  width: 80%;
+  margin: 7% auto;
+  padding: 1em;
+  border-radius: 1em;
+  border: 1px solid #000;
+  overflow: hidden;
+}
+
+.warning-message {
+  margin-top: 1rem;
+  background-color: rgba(247, 129, 129, 0.842);
+  padding: 0.2rem;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.8em;
+  color: white;
+  display: none;
+}
+
+.warning-db {
+  display: block;
+}
+
+.d-none {
+  display: none;
+}
