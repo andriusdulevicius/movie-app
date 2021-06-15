@@ -24,7 +24,7 @@ class App extends Component {
             <Route path='/about' component={AboutPage}></Route>
             <Route path='/contact' component={ContactPage}></Route>
             <Route path='/not-found' exact component={NotFound}></Route>
-            <Redirect from='/buble' to='/todos'></Redirect>
+            <Redirect from='/' to='/todos'></Redirect>
             <Route path='/' exact component={HomePage}></Route>
             <Redirect to='/not-found'></Redirect>
           </Switch>
