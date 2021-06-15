@@ -1,0 +1,12 @@
+1. npm i react-router-dom
+
+2.ikelti routeri i index.js
+import {BrowserRouter} from 'react-router-dom'
+
+apvyniojam App: (jis paduoda narsykles istorijos objekta i App )
+
+<React.StrictMode>
+    <BrowserRouter>
+    <App />
+    </BrowserRouter>
+  </React.StrictMode>,
