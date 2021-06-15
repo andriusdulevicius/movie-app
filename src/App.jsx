@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AppHeader from './components/appHeader/appHeader';
 import AppList from './components/appList/appList';
 import AppAddTodo from './components/appAddTodo/appAddTodo';
+import Navbar from './components/navbar/navbar';
 //app styles
 import './app.css';
 
@@ -93,6 +94,7 @@ class App extends Component {
   render() {
     return (
       <div className='app'>
+        <Navbar />
         <AppHeader />
         <AppList
           todos={this.state.todos}
