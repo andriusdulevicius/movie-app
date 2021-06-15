@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
 import TodoPage from './components/todoPage/todoPage';
 import Navbar from './components/navbar/navbar';
-import ContactPage from './components/pages/contact';
-import AboutPage from './components/pages/about';
-import HomePage from './components/pages/homePage';
-import SingleTodo from './components/pages/singleTodo';
+import ContactPage from './pages/contact';
+import AboutPage from './pages/about';
+import HomePage from './pages/homePage';
+import SingleTodo from './pages/singleTodo';
+import NotFound from './pages/404';
 
 //app styles
 import './app.css';
@@ -22,7 +23,10 @@ class App extends Component {
             <Route path='/todos' component={TodoPage}></Route>
             <Route path='/about' component={AboutPage}></Route>
             <Route path='/contact' component={ContactPage}></Route>
-            <Route path='/' component={HomePage}></Route>
+            <Route path='/not-found' exact component={NotFound}></Route>
+            <Redirect from='/buble' to='/todos'></Redirect>
+            <Route path='/' exact component={HomePage}></Route>
+            <Redirect to='/not-found'></Redirect>
           </Switch>
         </div>
       </div>
