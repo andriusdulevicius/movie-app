@@ -5,6 +5,7 @@ import Navbar from './components/navbar/navbar';
 import ContactPage from './components/pages/contact';
 import AboutPage from './components/pages/about';
 import HomePage from './components/pages/homePage';
+import SingleTodo from './components/pages/singleTodo';
 
 //app styles
 import './app.css';
@@ -17,6 +18,7 @@ class App extends Component {
         <Navbar />
         <div className='container'>
           <Switch>
+            <Route path='/todos/:id' component={SingleTodo}></Route>
             <Route path='/todos' component={TodoPage}></Route>
             <Route path='/about' component={AboutPage}></Route>
             <Route path='/contact' component={ContactPage}></Route>
