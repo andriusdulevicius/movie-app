@@ -1,0 +1,10 @@
+.linksContainer {
+  display: flex;
+  justify-content: space-around;
+  background-color: black;
+}
+
+.linksContainer a {
+  text-decoration: none;
+  color: snow;
+}
