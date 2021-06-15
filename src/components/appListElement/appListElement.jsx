@@ -10,7 +10,7 @@ class AppListElement extends Component {
     this.setState({ editTitle: event.target.value });
   };
   handleEnter = (event) => {
-    event.keyCode === 13 && this.props.onToggleEdit(this.props.todo.id, this.state.editTitle);
+    event.keyCode === 13 && this.props.onToggleEdit(this.props.todo._id, this.state.editTitle);
   };
   render() {
     const { todo, onToggle, onToggleEdit, onDelete, onFavToggle } = this.props;
@@ -25,16 +25,16 @@ class AppListElement extends Component {
 
     return (
       <li className='li-el app-todo-el'>
-        <i className={classes} onClick={() => onToggle(todo.id)}></i>
+        <i className={classes} onClick={() => onToggle(todo._id)}></i>
         <FavouriteTodo onFavToggle={onFavToggle} todo={todo} />
         {spanOrTodo}
         {todo.isDone ? (
           ''
         ) : (
-          <i className='fa fa-pencil' onClick={() => onToggleEdit(todo.id, this.state.editTitle)}></i>
+          <i className='fa fa-pencil' onClick={() => onToggleEdit(todo._id, this.state.editTitle)}></i>
         )}
 
-        <i className='fa fa-trash' onClick={() => onDelete(todo.id)}></i>
+        <i className='fa fa-trash' onClick={() => onDelete(todo._id)}></i>
       </li>
     );
   }

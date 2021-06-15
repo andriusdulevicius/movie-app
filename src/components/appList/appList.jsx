@@ -9,7 +9,7 @@ class AppList extends Component {
       <ul className='todo-list'>
         {this.props.todos.map((todo) => (
           <AppListElement
-            key={todo.id}
+            key={todo._id}
             todo={todo}
             onToggle={onToggle}
             onFavToggle={onFavToggle}

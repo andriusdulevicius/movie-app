@@ -3,25 +3,27 @@ import AppHeader from '../appHeader/appHeader';
 import AppList from '../appList/appList';
 import AppAddTodo from '../appAddTodo/appAddTodo';
 import { Link } from 'react-router-dom';
+import GetSendData from '../../service/getSendData';
 
 import './todo.css';
 
 class TodoPage extends Component {
   state = {
-    todos: [
-      { id: 1, isDone: false, isFavourite: false, title: 'Buy Milk', isEditOn: false },
+    //   todos: [
+    //     { id: 1, isDone: false, isFavourite: false, title: 'Buy Milk', isEditOn: false },
 
-      { id: 2, isDone: true, isFavourite: false, title: 'Buy Tv', isEditOn: false },
+    //     { id: 2, isDone: true, isFavourite: false, title: 'Buy Tv', isEditOn: false },
 
-      { id: 3, isDone: false, isFavourite: false, title: 'Go to Park', isEditOn: false },
+    //     { id: 3, isDone: false, isFavourite: false, title: 'Go to Park', isEditOn: false },
 
-      { id: 4, isDone: false, isFavourite: false, title: 'Learn React', isEditOn: false },
-    ],
-    currentId: 4,
+    //     { id: 4, isDone: false, isFavourite: false, title: 'Learn React', isEditOn: false },
+    //   ],
+    todos: [],
     isWarning: false,
   };
 
   componentDidMount() {
+    this.getAllTodos();
     this.sortTodos();
   }
 
@@ -34,7 +36,7 @@ class TodoPage extends Component {
 
   checkToggle = (id) => {
     const todos = [...this.state.todos];
-    const found = todos.find((t) => t.id === id);
+    const found = todos.find((t) => t._id === id);
     found.isDone = !found.isDone;
 
     this.sortTodos();
@@ -42,22 +44,23 @@ class TodoPage extends Component {
 
   checkFavToggle = (id) => {
     const todos = [...this.state.todos];
-    const found = todos.find((t) => t.id === id);
+    const found = todos.find((t) => t._id === id);
     found.isFavourite = !found.isFavourite;
     //todos apacioje yra todos: todos
     this.setState({ todos });
   };
 
   handleDelete = (id) => {
-    const filtered = this.state.todos.filter((td) => td.id !== id);
-    this.setState({ todos: filtered });
-    //arba
-    // console.log('deleted', id);
-    // const todos = [...this.state.todos];
-    // const found = todos.find((t) => t.id === id);
-    // console.log(todos.indexOf(found));
-    // todos.splice(todos.indexOf(found), 1);
-    // this.setState({ todos });
+    GetSendData.deleteTodo(id, (result) => {
+      this.getAllTodos();
+    });
+  };
+
+  getAllTodos = () => {
+    GetSendData.getAllTodos((result) => {
+      console.log(result);
+      this.setState({ todos: result });
+    });
   };
 
   handleAddTodo = (todoTitle) => {
@@ -66,11 +69,10 @@ class TodoPage extends Component {
       this.setState({ isWarning: warning });
       return;
     }
-    const todosCopy = [...this.state.todos];
-    const newCurrentId = 1 + this.state.currentId;
-    const newTodoObj = { id: newCurrentId, isDone: false, title: todoTitle, isEditOn: false };
-    todosCopy.unshift(newTodoObj);
-    this.setState({ todos: todosCopy, currentId: newCurrentId });
+    GetSendData.addNewTodo(todoTitle, () => {
+      this.getAllTodos();
+      this.setState({ todoTitle: '' });
+    });
   };
 
   toggleEdit = (id, newTitle) => {
@@ -80,7 +82,7 @@ class TodoPage extends Component {
       return;
     }
     const todos = [...this.state.todos];
-    const found = todos.find((t) => t.id === id);
+    const found = todos.find((t) => t._id === id);
     if (found.isEditOn) found.title = newTitle;
     found.isEditOn = !found.isEditOn;
     //todos apacioje yra todos: todos
@@ -102,7 +104,7 @@ class TodoPage extends Component {
           onDelete={this.handleDelete}
           onToggleEdit={this.toggleEdit}
         />
-        <AppAddTodo key={this.state.todos.id} onClickAddTodo={this.handleAddTodo} />
+        <AppAddTodo key={this.state.todos._id} onClickAddTodo={this.handleAddTodo} />
         <Link to='/about'>Go to About us page</Link>
         <div className={this.showWarning()}>
           <h4>Please enter some text into your todo! </h4>

@@ -26,4 +26,15 @@ export default class GetSendData {
       })
       .catch((err) => console.log(err));
   }
+
+  static deleteTodo(id, successCallBack) {
+    fetch(GetSendData.todoApiUrl + '/' + id, {
+      method: 'DELETE',
+    })
+      .then((resp) => resp.json())
+      .then((res) => {
+        successCallBack(res);
+      })
+      .catch((err) => console.log(err));
+  }
 }
