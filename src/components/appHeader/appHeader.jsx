@@ -6,14 +6,8 @@ class AppHeader extends Component {
   showTime = () => {
     let now = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const data = now.toLocaleDateString('LT', options);
-    // set interval vygdo funkcija kas intervale nurodyta laika milisekundem
+    const data = now.toLocaleString('LT', options);
 
-    setInterval(() => {
-      now = new Date();
-      let laikas = now.toLocaleString();
-      return laikas;
-    }, 1000);
     return data;
   };
 

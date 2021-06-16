@@ -2,22 +2,13 @@ import React, { Component } from 'react';
 import AppHeader from '../appHeader/appHeader';
 import AppList from '../appList/appList';
 import AppAddTodo from '../appAddTodo/appAddTodo';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import GetSendData from '../../service/getSendData';
 
 import './todo.css';
 
 class TodoPage extends Component {
   state = {
-    //   todos: [
-    //     { id: 1, isDone: false, isFavourite: false, title: 'Buy Milk', isEditOn: false },
-
-    //     { id: 2, isDone: true, isFavourite: false, title: 'Buy Tv', isEditOn: false },
-
-    //     { id: 3, isDone: false, isFavourite: false, title: 'Go to Park', isEditOn: false },
-
-    //     { id: 4, isDone: false, isFavourite: false, title: 'Learn React', isEditOn: false },
-    //   ],
     todos: [],
     isWarning: false,
   };
@@ -39,7 +30,7 @@ class TodoPage extends Component {
   };
 
   handleDelete = (id) => {
-    GetSendData.deleteTodo(id, (result) => {
+    GetSendData.deleteTodo(id, () => {
       this.getAllTodos();
     });
   };
@@ -54,7 +45,6 @@ class TodoPage extends Component {
     this.toggleWarning(todoTitle);
     GetSendData.addNewTodo(todoTitle, () => {
       this.getAllTodos();
-      this.setState({ todoTitle: '' });
     });
   };
 
@@ -96,7 +86,7 @@ class TodoPage extends Component {
           onToggleEdit={this.toggleEdit}
         />
         <AppAddTodo key={this.state.todos._id} onClickAddTodo={this.handleAddTodo} />
-        <Link to='/about'>Go to About us page</Link>
+        {/* <Link to='/about'>Go to About us page</Link> */}
         <div className={this.showWarning()}>
           <h4>Please enter some text into your todo! </h4>
         </div>

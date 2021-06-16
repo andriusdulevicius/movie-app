@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import navStyles from './navbar.module.css';
 
 class Navbar extends Component {
-  state = {};
   render() {
     return (
       <nav className={navStyles.navbar}>

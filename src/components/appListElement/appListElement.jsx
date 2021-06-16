@@ -22,11 +22,11 @@ class AppListElement extends Component {
       <span className={titleClass}>{todo.title}</span>
     );
 
-    let classes = todo.isDone ? 'fa fa-check-circle' : 'fa fa-circle-thin';
+    let checkClasses = todo.isDone ? 'fa fa-check-circle' : 'fa fa-circle-thin';
 
     return (
       <li className='li-el app-todo-el'>
-        <i className={classes} onClick={() => onToggle(todo._id, todo.isDone)}></i>
+        <i className={checkClasses} onClick={() => onToggle(todo._id, todo.isDone)}></i>
         <FavouriteTodo onFavToggle={onFavToggle} todo={todo} />
         {spanOrTodo}
         {todo.isDone ? (
