@@ -21,6 +21,9 @@ class Navbar extends Component {
           <Link className={navStyles.navLink} to='/todos'>
             Todos
           </Link>
+          <Link className={navStyles.navLink} to='/posts'>
+            Posts
+          </Link>
           <Link className={navStyles.navLink} to='/contact'>
             Contact
           </Link>

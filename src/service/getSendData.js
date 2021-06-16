@@ -1,14 +1,8 @@
 export default class GetSendData {
   static todoApiUrl = 'http://localhost:3002/api/todos';
+  static blogApiUrl = 'http://localhost:3002/api/posts';
 
   static async getAllTodos(successCallBack) {
-    // fetch(GetSendData.todoApiUrl)
-    //   .then((resp) => resp.json())
-    //   .then((res) => {
-    //     successCallBack(res);
-    //   })
-    //   .catch((err) => console.log(err));
-
     const resp = await fetch(GetSendData.todoApiUrl);
     const data = await resp.json();
     successCallBack(data);
@@ -73,6 +67,34 @@ export default class GetSendData {
 
     const data = await resp.json();
 
+    successCallBack(data);
+  }
+
+  static async getAllPosts(successCallBack) {
+    const resp = await fetch(GetSendData.blogApiUrl);
+    const data = await resp.json();
+    successCallBack(data);
+  }
+
+  static async addNewPost(title, author, text, successCallBack) {
+    const newPost = { title, author, text };
+    const resp = await fetch(GetSendData.blogApiUrl + '/new', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newPost),
+    });
+    const data = await resp.json();
+    successCallBack(data);
+  }
+
+  static async deletePost(id, successCallBack) {
+    const resp = await fetch(GetSendData.blogApiUrl + '/' + id, {
+      method: 'DELETE',
+    });
+    const data = resp.json();
     successCallBack(data);
   }
 }

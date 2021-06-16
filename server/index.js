@@ -14,8 +14,10 @@ app.use(cors());
 app.use(express.json());
 
 const todoApi = require('./api/todoApi');
+const postApi = require('./api/postApi');
 
 app.use('/', todoApi);
+app.use('/', postApi);
 
 // prisijungimas prie duomenu bazes
 mongoose

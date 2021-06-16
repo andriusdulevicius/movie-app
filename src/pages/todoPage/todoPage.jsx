@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AppHeader from '../../components/appHeader/appHeader';
-import AppList from '../../components/appList/appList';
-import AppAddTodo from '../../components/appAddTodo/appAddTodo';
+import AppList from '../../components/todoComponents/appList/appList';
+import AppAddTodo from '../../components/todoComponents/appAddTodo/appAddTodo';
 // import { Link } from 'react-router-dom';
 import GetSendData from '../../service/getSendData';
 

@@ -7,6 +7,7 @@ import AboutPage from './pages/about';
 import HomePage from './pages/homePage';
 import SingleTodo from './pages/singleTodo';
 import NotFound from './pages/404';
+import PostPage from './pages/postsPage/postsPage';
 
 //app styles
 import './app.css';
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path='/todos' component={TodoPage}></Route>
             <Route path='/about' component={AboutPage}></Route>
             <Route path='/contact' component={ContactPage}></Route>
+            <Route path='/posts' component={PostPage}></Route>
             <Route path='/not-found' exact component={NotFound}></Route>
             <Route path='/' exact component={HomePage}></Route>
             <Redirect to='/not-found'></Redirect>
