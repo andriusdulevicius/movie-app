@@ -9,9 +9,9 @@ class ContactPage extends Component {
         <p className='paragraph'>
           Please do not hesitate if you would like to contact me , regarding job offering for a Software Engineer/
           Developer position.
-          <div className='paragraph'>
+          <span>
             My e-mail address is: <strong> andriusdulevicius@gmail.com </strong>
-          </div>
+          </span>
         </p>
       </div>
     );

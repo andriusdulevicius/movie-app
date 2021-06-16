@@ -28,41 +28,38 @@ export default class GetSendData {
     successCallBack(data);
   }
 
-  static deleteTodo(id, successCallBack) {
-    fetch(GetSendData.todoApiUrl + '/' + id, {
+  static async deleteTodo(id, successCallBack) {
+    const resp = await fetch(GetSendData.todoApiUrl + '/' + id, {
       method: 'DELETE',
-    })
-      .then((resp) => resp.json())
-      .then((res) => {
-        successCallBack(res);
-      })
-      .catch((err) => console.log(err));
+    });
+    const data = resp.json();
+    successCallBack(data);
   }
 
-  static checkTodo(id, doneStatus, successCallBack) {
-    fetch(`${GetSendData.todoApiUrl}/${id}/check`, {
+  static async checkTodo(id, doneStatus, successCallBack) {
+    const resp = await fetch(`${GetSendData.todoApiUrl}/${id}/check`, {
       method: 'PATCH',
       body: JSON.stringify({ isDone: !doneStatus }),
 
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
-    })
-      .then((response) => response.json())
-      .then((result) => successCallBack(result));
+    });
+    const data = await resp.json();
+    successCallBack(data);
   }
 
-  static checkFavTodo(id, favStatus, successCallBack) {
-    fetch(`${GetSendData.todoApiUrl}/${id}/favCheck`, {
+  static async checkFavTodo(id, favStatus, successCallBack) {
+    const resp = await fetch(`${GetSendData.todoApiUrl}/${id}/favCheck`, {
       method: 'PATCH',
       body: JSON.stringify({ isFavourite: !favStatus }),
 
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
-    })
-      .then((response) => response.json())
-      .then((result) => successCallBack(result));
+    });
+    const data = resp.json();
+    successCallBack(data);
   }
 
   static async editTodo(id, newTitle, editStatus, successCallBack) {

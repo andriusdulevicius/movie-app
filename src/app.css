@@ -20,3 +20,8 @@ img {
 .paragraph {
   padding-top: 1rem;
 }
+
+.paragraph span {
+  padding-top: 1rem;
+  display: inline-block;
+}
