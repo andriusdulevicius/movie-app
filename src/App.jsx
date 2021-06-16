@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router';
-import TodoPage from './components/todoPage/todoPage';
+import TodoPage from './pages/todoPage/todoPage';
 import Navbar from './components/navbar/navbar';
 import ContactPage from './pages/contact';
 import AboutPage from './pages/about';
