@@ -10,7 +10,8 @@ class AppListElement extends Component {
     this.setState({ editTitle: event.target.value });
   };
   handleEnter = (event) => {
-    event.keyCode === 13 && this.props.onToggleEdit(this.props.todo._id, this.state.editTitle);
+    const { todo, onToggleEdit } = this.props;
+    event.keyCode === 13 && onToggleEdit(todo._id, this.state.editTitle, todo.isEditOn);
   };
   render() {
     const { todo, onToggle, onToggleEdit, onDelete, onFavToggle } = this.props;
@@ -31,7 +32,7 @@ class AppListElement extends Component {
         {todo.isDone ? (
           ''
         ) : (
-          <i className='fa fa-pencil' onClick={() => onToggleEdit(todo._id, this.state.editTitle)}></i>
+          <i className='fa fa-pencil' onClick={() => onToggleEdit(todo._id, this.state.editTitle, todo.isEditOn)}></i>
         )}
 
         <i className='fa fa-trash' onClick={() => onDelete(todo._id)}></i>

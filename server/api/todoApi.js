@@ -22,16 +22,22 @@ router.delete('/api/todos/:id', (req, res) => {
     .then((result) => res.json(result))
     .catch((err) => res.status(500).json({ success: false, err }));
 });
-router.patch('/api/todos/:id', (req, res) => {
+router.patch('/api/todos/:id/check', (req, res) => {
   const doneStatus = req.body.isDone;
 
   Todo.findByIdAndUpdate(req.params.id, { isDone: doneStatus })
     .then((result) => res.json(result))
     .catch((err) => res.status(500).json({ success: false, err }));
 });
-router.patch('/api/todos/:id', (req, res) => {
+router.patch('/api/todos/:id/favCheck', (req, res) => {
   const favStatus = req.body.isFavourite;
   Todo.findByIdAndUpdate(req.params.id, { isFavourite: favStatus })
+    .then((result) => res.json(result))
+    .catch((err) => res.status(500).json({ success: false, err }));
+});
+
+router.put('/api/todos/:id/editTodo', (req, res) => {
+  Todo.findByIdAndUpdate(req.params.id, { title: req.body.title, isEditOn: req.body.isEditOn })
     .then((result) => res.json(result))
     .catch((err) => res.status(500).json({ success: false, err }));
 });

@@ -51,29 +51,33 @@ class TodoPage extends Component {
   };
 
   handleAddTodo = (todoTitle) => {
-    if (todoTitle === '') {
-      const warning = !this.state.isWarning;
-      this.setState({ isWarning: warning });
-      return;
-    }
+    this.toggleWarning(todoTitle);
     GetSendData.addNewTodo(todoTitle, () => {
       this.getAllTodos();
       this.setState({ todoTitle: '' });
     });
   };
 
-  toggleEdit = (id, newTitle) => {
-    if (newTitle === '') {
-      const warning = !this.state.isWarning;
-      this.setState({ isWarning: warning });
+  toggleEdit = (id, newTitle, editStatus) => {
+    if (newTitle.length < 1) {
+      this.setState({ isWarning: true });
       return;
+    } else {
+      this.setState({ isWarning: false });
+      GetSendData.editTodo(id, newTitle, editStatus, () => {
+        this.getAllTodos();
+        this.setState({ title: newTitle });
+      });
     }
-    const todos = [...this.state.todos];
-    const found = todos.find((t) => t._id === id);
-    if (found.isEditOn) found.title = newTitle;
-    found.isEditOn = !found.isEditOn;
-    //todos apacioje yra todos: todos
-    this.setState({ todos });
+  };
+
+  toggleWarning = (todoTitle) => {
+    if (todoTitle.length < 1) {
+      this.setState({ isWarning: true });
+      return;
+    } else {
+      this.setState({ isWarning: false });
+    }
   };
 
   showWarning = () => {

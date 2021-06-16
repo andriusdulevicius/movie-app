@@ -14,21 +14,18 @@ export default class GetSendData {
     successCallBack(data);
   }
 
-  static addNewTodo(title, successCallBack) {
+  static async addNewTodo(title, successCallBack) {
     const newTodo = { title: title };
-    fetch(GetSendData.todoApiUrl + '/new', {
+    const resp = await fetch(GetSendData.todoApiUrl + '/new', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(newTodo),
-    })
-      .then((resp) => resp.json())
-      .then((res) => {
-        successCallBack(res);
-      })
-      .catch((err) => console.log(err));
+    });
+    const data = await resp.json();
+    successCallBack(data);
   }
 
   static deleteTodo(id, successCallBack) {
@@ -43,7 +40,7 @@ export default class GetSendData {
   }
 
   static checkTodo(id, doneStatus, successCallBack) {
-    fetch(GetSendData.todoApiUrl + '/' + id, {
+    fetch(`${GetSendData.todoApiUrl}/${id}/check`, {
       method: 'PATCH',
       body: JSON.stringify({ isDone: !doneStatus }),
 
@@ -56,7 +53,7 @@ export default class GetSendData {
   }
 
   static checkFavTodo(id, favStatus, successCallBack) {
-    fetch(GetSendData.todoApiUrl + '/' + id, {
+    fetch(`${GetSendData.todoApiUrl}/${id}/favCheck`, {
       method: 'PATCH',
       body: JSON.stringify({ isFavourite: !favStatus }),
 
@@ -66,5 +63,19 @@ export default class GetSendData {
     })
       .then((response) => response.json())
       .then((result) => successCallBack(result));
+  }
+
+  static async editTodo(id, newTitle, editStatus, successCallBack) {
+    const resp = await fetch(`${GetSendData.todoApiUrl}/${id}/editTodo`, {
+      method: 'PUT',
+      body: JSON.stringify({ title: newTitle, isEditOn: !editStatus }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+
+    const data = await resp.json();
+
+    successCallBack(data);
   }
 }
