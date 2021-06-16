@@ -25,3 +25,8 @@ img {
   padding-top: 1rem;
   display: inline-block;
 }
+
+.add-todo-input {
+  width: 60%;
+  margin-left: 0.3rem;
+}

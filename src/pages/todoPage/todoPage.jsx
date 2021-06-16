@@ -65,9 +65,7 @@ class TodoPage extends Component {
     if (todoTitle.length < 1) {
       this.setState({ isWarning: true });
       return;
-    } else {
-      this.setState({ isWarning: false });
-    }
+    } else this.setState({ isWarning: false });
   };
 
   showWarning = () => {

@@ -17,7 +17,13 @@ class AppListElement extends Component {
     const { todo, onToggle, onToggleEdit, onDelete, onFavToggle } = this.props;
     let titleClass = todo.isDone ? 'done-title' : '';
     const spanOrTodo = todo.isEditOn ? (
-      <input type='text' value={this.state.editTitle} onChange={this.handleChange} onKeyDown={this.handleEnter} />
+      <input
+        className='add-todo-input'
+        type='text'
+        value={this.state.editTitle}
+        onChange={this.handleChange}
+        onKeyDown={this.handleEnter}
+      />
     ) : (
       <span className={titleClass}>{todo.title}</span>
     );
