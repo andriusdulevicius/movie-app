@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AppHeader from '../../components/appHeader/appHeader';
 import AppList from '../../components/todoComponents/appList/appList';
 import AppAddTodo from '../../components/todoComponents/appAddTodo/appAddTodo';
+import SortTodos from '../../components/sortTodos/sortTodos';
 // import { Link } from 'react-router-dom';
 import GetSendData from '../../service/getSendData';
 import { validateTitle } from '../../service/validate';
@@ -20,6 +21,13 @@ class TodoPage extends Component {
   componentDidMount() {
     this.getAllTodos();
   }
+
+  sortDoneTodos = () => {
+    this.setState({ todos: this.state.todos.filter((td) => td.isDone) });
+  };
+  sortUndoneTodos = () => {
+    this.setState({ todos: this.state.todos.filter((td) => td.isDone === false) });
+  };
 
   checkToggle = (id, doneStatus) => {
     GetSendData.checkTodo(id, doneStatus, () => {
@@ -91,6 +99,7 @@ class TodoPage extends Component {
     return (
       <div className='todo-page'>
         <AppHeader />
+        <SortTodos sortDoneTodos={this.sortDoneTodos} sortUnDoneTodos={this.sortUndoneTodos} />
         <AppList
           todos={this.state.todos}
           onToggle={this.checkToggle}
