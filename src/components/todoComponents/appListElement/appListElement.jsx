@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import './style.css';
 import FavouriteTodo from '../appFavouriteTodos/appFavouriteTodos';
+import SimpleAlert from '../../common/alert/alert';
 class AppListElement extends Component {
   state = {
     editTitle: this.props.todo.title,
+    onOff: true,
+  };
+
+  hideAlert = () => {
+    this.setState({ onOff: false });
+  };
+
+  showAlertAndSendProps = () => {
+    const { isEditOn, _id } = this.props.todo;
+    this.setState({ onOff: true });
+    this.props.onToggleEdit(_id, this.state.editTitle, isEditOn);
   };
 
   handleChange = (event) => {
@@ -14,7 +26,7 @@ class AppListElement extends Component {
     event.keyCode === 13 && onToggleEdit(todo._id, this.state.editTitle, todo.isEditOn);
   };
   render() {
-    const { todo, onToggle, onToggleEdit, onDelete, onFavToggle, errors } = this.props;
+    const { todo, onToggle, onDelete, onFavToggle, errors } = this.props;
     let titleClass = todo.isDone ? 'done-title' : '';
     const spanOrTodo = todo.isEditOn ? (
       <React.Fragment>
@@ -41,12 +53,8 @@ class AppListElement extends Component {
           </React.Fragment>
         )}
         {spanOrTodo}
-        {todo.isDone ? (
-          ''
-        ) : (
-          <i className='fa fa-pencil' onClick={() => onToggleEdit(todo._id, this.state.editTitle, todo.isEditOn)}></i>
-        )}
-        {todo.isEditOn && errors && <p className='error-msg mt-2'>{errors}</p>}
+        {todo.isDone ? '' : <i className='fa fa-pencil' onClick={this.showAlertAndSendProps}></i>}
+        {todo.isEditOn && errors && this.state.onOff && <SimpleAlert hideAlert={this.hideAlert}>{errors}</SimpleAlert>}
 
         <i className='fa fa-trash' onClick={() => onDelete(todo._id)}></i>
       </li>

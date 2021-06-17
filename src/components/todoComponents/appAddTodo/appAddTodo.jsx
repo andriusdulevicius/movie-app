@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import '../../../app.css';
 import { validateTitle } from '../../../service/validate';
+import SimpleAlert from '../../common/alert/alert';
 
 class AppAddTodo extends Component {
   state = {
     newTodo: '',
+    onOff: true,
+  };
+
+  hideAlert = () => {
+    this.setState({ onOff: false });
   };
 
   handleChange = (event) => {
@@ -12,9 +18,10 @@ class AppAddTodo extends Component {
   };
 
   sendAddTodo = () => {
+    this.setState({ onOff: true });
     const { newTodo } = this.state;
     if (validateTitle(newTodo)) {
-      this.props.onErrorFeedback({ addTodo: 'The title is too short' });
+      this.props.onErrorFeedback({ addTodo: validateTitle(newTodo) });
       return;
     }
     this.props.onClickAddTodo(newTodo);
@@ -36,7 +43,9 @@ class AppAddTodo extends Component {
           type='text'
           placeholder='Add new todo'
         />
-        {this.props.errors && <p className='error-msg'>{this.props.errors}</p>}
+        {this.props.errors && this.state.onOff && (
+          <SimpleAlert hideAlert={this.hideAlert}>{this.props.errors}</SimpleAlert>
+        )}
       </div>
     );
   }

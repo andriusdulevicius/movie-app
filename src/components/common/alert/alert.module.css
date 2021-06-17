@@ -1,0 +1,14 @@
+.errorMsg {
+  margin-left: 1em;
+  margin-top: 0.5em;
+  color: white;
+  background-color: rgb(255, 124, 101);
+  display: inline-block;
+  border-radius: 0.2rem;
+  font-size: small;
+  padding: 0 0.2em;
+}
+
+.simpleAlert i {
+  cursor: pointer;
+}
