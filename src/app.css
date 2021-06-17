@@ -30,3 +30,15 @@ img {
   width: 60%;
   margin-left: 0.3rem;
 }
+
+.is-invalid {
+  background-color: rgb(255, 180, 167);
+}
+
+.error-msg {
+  margin-left: 1em;
+  color: white;
+  background-color: rgb(255, 124, 101);
+  display: inline-block;
+  border-radius: 0.2rem;
+}

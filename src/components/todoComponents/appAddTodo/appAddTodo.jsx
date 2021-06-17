@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../../app.css';
 
 class AppAddTodo extends Component {
   state = {
@@ -10,6 +11,10 @@ class AppAddTodo extends Component {
   };
 
   sendAddTodo = () => {
+    if (this.state.newTodo.length < 3) {
+      this.props.onErrorFeedback({ addTodo: 'The title is too short' });
+      return;
+    }
     this.props.onClickAddTodo(this.state.newTodo);
     this.setState({ newTodo: '' });
   };
@@ -25,10 +30,11 @@ class AppAddTodo extends Component {
           onKeyDown={(event) => this.handleEnter(event)}
           onChange={this.handleChange}
           value={this.state.newTodo}
-          className='add-todo-input'
+          className={this.props.errors ? 'is-invalid' : 'add-todo-input'}
           type='text'
           placeholder='Add new todo'
         />
+        {this.props.errors && <p className='error-msg'>{this.props.errors}</p>}
       </div>
     );
   }

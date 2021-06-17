@@ -17,7 +17,7 @@ router.post('/api/todos/new', async (req, res) => {
     const result = await newTodo.save();
     res.json({ success: true, result });
   } catch (err) {
-    res.status(500).json({ success: false, err });
+    res.status(400).json({ success: false, err });
   }
 });
 

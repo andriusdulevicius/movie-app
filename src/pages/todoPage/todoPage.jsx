@@ -11,6 +11,9 @@ class TodoPage extends Component {
   state = {
     todos: [],
     isWarning: false,
+    errors: {
+      addTodo: '',
+    },
   };
 
   componentDidMount() {
@@ -42,35 +45,39 @@ class TodoPage extends Component {
   };
 
   handleAddTodo = (todoTitle) => {
-    this.toggleWarning(todoTitle);
-    GetSendData.addNewTodo(todoTitle, () => {
-      this.getAllTodos();
+    // this.toggleWarning(todoTitle);
+    GetSendData.addNewTodo(todoTitle, (result) => {
+      if (!result.success) {
+        console.log('klaida fronte');
+        this.setState({ errors: { addTodo: 'Field cannot be empty' } });
+      } else {
+        this.getAllTodos();
+        this.setState({ errors: { addTodo: '' } });
+      }
     });
   };
 
   toggleEdit = (id, newTitle, editStatus) => {
-    if (newTitle.length < 1) {
-      this.setState({ isWarning: true });
-      return;
-    } else {
-      this.setState({ isWarning: false });
-      GetSendData.editTodo(id, newTitle, editStatus, () => {
-        this.getAllTodos();
-        this.setState({ title: newTitle });
-      });
-    }
+    GetSendData.editTodo(id, newTitle, editStatus, () => {
+      this.getAllTodos();
+      this.setState({ title: newTitle });
+    });
   };
 
-  toggleWarning = (todoTitle) => {
-    if (todoTitle.length < 3) {
-      this.setState({ isWarning: true });
-      return;
-    } else this.setState({ isWarning: false });
+  handleError = (errObj) => {
+    this.setState({ errors: errObj });
   };
 
-  showWarning = () => {
-    return this.state.isWarning ? 'warning-message warning-db' : 'warning-message';
-  };
+  // toggleWarning = (todoTitle) => {
+  //   if (todoTitle.length < 3) {
+  //     this.setState({ isWarning: true });
+  //     return;
+  //   } else this.setState({ isWarning: false });
+  // };
+
+  // showWarning = () => {
+  //   return this.state.isWarning ? 'warning-message warning-db' : 'warning-message';
+  // };
 
   render() {
     return (
@@ -83,11 +90,16 @@ class TodoPage extends Component {
           onDelete={this.handleDelete}
           onToggleEdit={this.toggleEdit}
         />
-        <AppAddTodo key={this.state.todos._id} onClickAddTodo={this.handleAddTodo} />
+        <AppAddTodo
+          onErrorFeedback={this.handleError}
+          errors={this.state.errors.addTodo}
+          key={this.state.todos._id}
+          onClickAddTodo={this.handleAddTodo}
+        />
         {/* <Link to='/about'>Go to About us page</Link> */}
-        <div className={this.showWarning()}>
+        {/* <div className={this.showWarning()}>
           <h4>Your todo must be at least 3 charecters long! </h4>
-        </div>
+        </div> */}
       </div>
     );
   }

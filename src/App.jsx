@@ -10,6 +10,7 @@ import NotFound from './pages/404';
 import PostPage from './pages/postsPage/postsPage';
 
 //app styles
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 class App extends Component {

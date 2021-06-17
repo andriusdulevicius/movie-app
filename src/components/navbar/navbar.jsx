@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 //importuojam modulini individualu css
-import navStyles from './navbar.module.css';
+import navStyles from '../../navbar.module.css';
 
 class Navbar extends Component {
   render() {
