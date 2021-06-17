@@ -4,7 +4,7 @@ import AppListElement from '../appListElement/appListElement';
 
 class AppList extends Component {
   render() {
-    const { onToggle, onFavToggle, onDelete, onToggleEdit, showWarning } = this.props;
+    const { onToggle, onFavToggle, onDelete, onToggleEdit, showWarning, errors } = this.props;
     return (
       <ul className='todo-list'>
         {this.props.todos.map((todo) => (
@@ -16,6 +16,7 @@ class AppList extends Component {
             onDelete={onDelete}
             onToggleEdit={onToggleEdit}
             showWarning={showWarning}
+            errors={errors}
           />
         ))}
       </ul>

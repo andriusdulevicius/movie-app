@@ -41,4 +41,6 @@ img {
   background-color: rgb(255, 124, 101);
   display: inline-block;
   border-radius: 0.2rem;
+  font-size: small;
+  padding: 0 0.2em;
 }

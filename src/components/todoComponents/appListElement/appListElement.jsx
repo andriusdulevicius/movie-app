@@ -14,16 +14,18 @@ class AppListElement extends Component {
     event.keyCode === 13 && onToggleEdit(todo._id, this.state.editTitle, todo.isEditOn);
   };
   render() {
-    const { todo, onToggle, onToggleEdit, onDelete, onFavToggle } = this.props;
+    const { todo, onToggle, onToggleEdit, onDelete, onFavToggle, errors } = this.props;
     let titleClass = todo.isDone ? 'done-title' : '';
     const spanOrTodo = todo.isEditOn ? (
-      <input
-        className='add-todo-input'
-        type='text'
-        value={this.state.editTitle}
-        onChange={this.handleChange}
-        onKeyDown={this.handleEnter}
-      />
+      <React.Fragment>
+        <input
+          className={errors ? 'add-todo-input is-invalid' : 'add-todo-input'}
+          type='text'
+          value={this.state.editTitle}
+          onChange={this.handleChange}
+          onKeyDown={this.handleEnter}
+        />
+      </React.Fragment>
     ) : (
       <span className={titleClass}>{todo.title}</span>
     );
@@ -32,14 +34,19 @@ class AppListElement extends Component {
 
     return (
       <li className='li-el app-todo-el'>
-        <i className={checkClasses} onClick={() => onToggle(todo._id, todo.isDone)}></i>
-        <FavouriteTodo onFavToggle={onFavToggle} todo={todo} />
+        {!todo.isEditOn && (
+          <React.Fragment>
+            <i className={checkClasses} onClick={() => onToggle(todo._id, todo.isDone)}></i>
+            <FavouriteTodo onFavToggle={onFavToggle} todo={todo} />
+          </React.Fragment>
+        )}
         {spanOrTodo}
         {todo.isDone ? (
           ''
         ) : (
           <i className='fa fa-pencil' onClick={() => onToggleEdit(todo._id, this.state.editTitle, todo.isEditOn)}></i>
         )}
+        {todo.isEditOn && errors && <p className='error-msg mt-2'>{errors}</p>}
 
         <i className='fa fa-trash' onClick={() => onDelete(todo._id)}></i>
       </li>

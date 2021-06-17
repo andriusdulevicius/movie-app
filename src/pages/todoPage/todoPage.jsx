@@ -13,6 +13,7 @@ class TodoPage extends Component {
     isWarning: false,
     errors: {
       addTodo: '',
+      editTodo: '',
     },
   };
 
@@ -57,11 +58,25 @@ class TodoPage extends Component {
     });
   };
 
+  validateInput(val) {
+    const trimmed = val.trim();
+    if (trimmed.length <= 3) {
+      return 'Title is too short';
+    }
+    return '';
+  }
+
   toggleEdit = (id, newTitle, editStatus) => {
-    GetSendData.editTodo(id, newTitle, editStatus, () => {
-      this.getAllTodos();
-      this.setState({ title: newTitle });
-    });
+    if (this.validateInput(newTitle)) {
+      console.log('klaida update');
+      this.setState({ errors: { ...this.state.errors, editTodo: this.validateInput(newTitle) } });
+    } else {
+      GetSendData.editTodo(id, newTitle, editStatus, () => {
+        this.getAllTodos();
+        this.setState({ title: newTitle });
+      });
+      this.setState({ errors: { ...this.state.errors, editTodo: '' } });
+    }
   };
 
   handleError = (errObj) => {
@@ -89,6 +104,7 @@ class TodoPage extends Component {
           onFavToggle={this.checkFavToggle}
           onDelete={this.handleDelete}
           onToggleEdit={this.toggleEdit}
+          errors={this.state.errors.editTodo}
         />
         <AppAddTodo
           onErrorFeedback={this.handleError}
