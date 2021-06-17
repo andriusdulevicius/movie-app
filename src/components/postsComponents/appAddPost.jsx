@@ -24,7 +24,7 @@ class AppAddPost extends Component {
 
   render() {
     return (
-      <div className='add-post-container'>
+      <div className='add-post-container mb-4'>
         <h2>Add new Blog Post</h2>
         <form onSubmit={this.sendAddPost}>
           <div className='form-group'>

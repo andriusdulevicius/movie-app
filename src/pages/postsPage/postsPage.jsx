@@ -33,18 +33,18 @@ class PostPage extends Component {
     });
   };
 
-  // toggleEdit = (blogPost) => {
-  //   if (blogPost.newTitle.length < 3 || blogPost.newTitle !== String ) {
-  //     this.setState({ isWarning: true });
-  //     return;
-  //   } else {
-  //     this.setState({ isWarning: false });
-  //     GetSendData.editPost(blogPost, () => {
-  //       this.getAllPosts();
-  //       this.setState({ author: blogPost.author, title: blogPost.newTitle, text: blogPost.newText });
-  //     });
-  //   }
-  // };
+  toggleEdit = (blogPost) => {
+    if (blogPost.title.length < 3 || blogPost.title !== String) {
+      this.setState({ isWarning: true });
+      return;
+    } else {
+      this.setState({ isWarning: false });
+      GetSendData.editPost(blogPost, () => {
+        this.getAllPosts();
+        this.setState({ author: blogPost.author, title: blogPost.title, text: blogPost.newText });
+      });
+    }
+  };
 
   toggleWarning = (PostTitle) => {
     if (PostTitle.length < 1) {

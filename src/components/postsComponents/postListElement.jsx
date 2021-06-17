@@ -12,27 +12,29 @@ class PostListElement extends Component {
   };
 
   render() {
-    const { _id, title, author, body, createdAt } = this.props.Post;
+    const { _id, title, author, text, createdAt } = this.props.Post;
     const editLink = `/blog/single/${_id}`;
 
     return (
-      <li className='card-body'>
-        <h5 className='card-title'>{title}</h5>
-        <h6 className='text-muted'>{author}</h6>
-        <p className='card-text'>{body}</p>
-        <div className='d-flex justify-content-between align-items-center'>
-          <div className='btn-group'>
-            <Link to={editLink} className='btn btn-sm btn-outline-secondary'>
-              Edit
-            </Link>
-          </div>
-          <div className='btn-group'>
-            <button onClick={() => this.props.onDelete(_id)} className='btn btn-sm btn-danger'>
-              Delete
-            </button>
-          </div>
+      <li className='card mb-4 shadow-sm'>
+        <div className='card-body'>
+          <h5 className='card-title'>{title}</h5>
+          <h6 className='text-muted'>{author}</h6>
+          <p className='card-text'>{text}</p>
+          <div className='d-flex justify-content-between align-items-center'>
+            <div className='btn-group'>
+              <Link to={editLink} className='btn btn-sm btn-outline-secondary'>
+                Edit
+              </Link>
+            </div>
+            <div className='btn-group'>
+              <button onClick={() => this.props.onDelete(_id)} className='btn btn-sm btn-danger'>
+                Delete
+              </button>
+            </div>
 
-          <small className='text-muted'>{createdAt.toLocaleString()}</small>
+            <small className='text-muted'>{createdAt.toLocaleString()}</small>
+          </div>
         </div>
       </li>
     );
