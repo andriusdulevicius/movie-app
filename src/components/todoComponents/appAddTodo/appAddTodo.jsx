@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../../app.css';
+import { validateTitle } from '../../../service/validate';
 
 class AppAddTodo extends Component {
   state = {
@@ -12,12 +13,11 @@ class AppAddTodo extends Component {
 
   sendAddTodo = () => {
     const { newTodo } = this.state;
-    const trimmed = newTodo.trim();
-    if (trimmed.length <= 3) {
+    if (validateTitle(newTodo)) {
       this.props.onErrorFeedback({ addTodo: 'The title is too short' });
       return;
     }
-    this.props.onClickAddTodo(trimmed);
+    this.props.onClickAddTodo(newTodo);
     this.setState({ newTodo: '' });
   };
   handleEnter = (event) => {

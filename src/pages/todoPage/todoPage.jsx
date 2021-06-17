@@ -4,7 +4,7 @@ import AppList from '../../components/todoComponents/appList/appList';
 import AppAddTodo from '../../components/todoComponents/appAddTodo/appAddTodo';
 // import { Link } from 'react-router-dom';
 import GetSendData from '../../service/getSendData';
-
+import { validateTitle } from '../../service/validate';
 import './todo.css';
 
 class TodoPage extends Component {
@@ -58,18 +58,10 @@ class TodoPage extends Component {
     });
   };
 
-  validateInput(val) {
-    const trimmed = val.trim();
-    if (trimmed.length <= 3) {
-      return 'Title is too short';
-    }
-    return '';
-  }
-
   toggleEdit = (id, newTitle, editStatus) => {
-    if (this.validateInput(newTitle)) {
+    if (validateTitle(newTitle)) {
       console.log('klaida update');
-      this.setState({ errors: { ...this.state.errors, editTodo: this.validateInput(newTitle) } });
+      this.setState({ errors: { ...this.state.errors, editTodo: validateTitle(newTitle) } });
     } else {
       GetSendData.editTodo(id, newTitle, editStatus, () => {
         this.getAllTodos();
@@ -83,6 +75,7 @@ class TodoPage extends Component {
     this.setState({ errors: errObj });
   };
 
+  // buvau pasidares kitaip validation:
   // toggleWarning = (todoTitle) => {
   //   if (todoTitle.length < 3) {
   //     this.setState({ isWarning: true });
