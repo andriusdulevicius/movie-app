@@ -76,9 +76,8 @@ export default class GetSendData {
     successCallBack(data);
   }
 
-  static async addNewPost(title, author, text, successCallBack) {
-    const newPost = { title, author, text };
-    const resp = await fetch(GetSendData.blogApiUrl + '/new', {
+  static async addNewPost(newPost, successCallBack) {
+    const resp = await fetch(GetSendData.blogApiUrl, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -87,6 +86,8 @@ export default class GetSendData {
       body: JSON.stringify(newPost),
     });
     const data = await resp.json();
+    console.log(data);
+
     successCallBack(data);
   }
 

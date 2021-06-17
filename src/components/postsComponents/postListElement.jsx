@@ -3,16 +3,12 @@ import { Link } from 'react-router-dom';
 
 class PostListElement extends Component {
   state = {
-    editTitle: this.props.todo.title,
-    editText: this.props.todo.text,
+    editTitle: this.props.Post.title,
+    editText: this.props.Post.text,
   };
 
   handleChange = (event) => {
     this.setState({ editTitle: event.target.value, editText: event.target.value });
-  };
-  handleEnter = (event) => {
-    const { todo, onToggleEdit } = this.props;
-    event.keyCode === 13 && onToggleEdit(todo._id, this.state.editTitle, todo.isEditOn);
   };
 
   render() {

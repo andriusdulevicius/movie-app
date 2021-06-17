@@ -26,9 +26,9 @@ class PostPage extends Component {
     });
   };
 
-  handleAddPost = ({ title, author, text }) => {
+  handleAddPost = (newPost) => {
     // this.toggleWarning(title);
-    GetSendData.addNewPost(title, author, text, () => {
+    GetSendData.addNewPost(newPost, () => {
       this.getAllPosts();
     });
   };

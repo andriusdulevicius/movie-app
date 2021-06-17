@@ -62,7 +62,7 @@ class TodoPage extends Component {
   };
 
   toggleWarning = (todoTitle) => {
-    if (todoTitle.length < 1) {
+    if (todoTitle.length < 3) {
       this.setState({ isWarning: true });
       return;
     } else this.setState({ isWarning: false });
@@ -86,7 +86,7 @@ class TodoPage extends Component {
         <AppAddTodo key={this.state.todos._id} onClickAddTodo={this.handleAddTodo} />
         {/* <Link to='/about'>Go to About us page</Link> */}
         <div className={this.showWarning()}>
-          <h4>Please enter some text into your todo! </h4>
+          <h4>Your todo must be at least 3 charecters long! </h4>
         </div>
       </div>
     );

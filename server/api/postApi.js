@@ -11,7 +11,7 @@ router.get('/api/posts', async (req, res) => {
   }
 });
 
-router.post('/api/posts/new', async (req, res) => {
+router.post('/api/posts', async (req, res) => {
   // const { title, author, text } = req.body;
   const newPost = new Post(req.body);
   try {
