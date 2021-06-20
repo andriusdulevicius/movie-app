@@ -86,7 +86,6 @@ export default class GetSendData {
       body: JSON.stringify(newPost),
     });
     const data = await resp.json();
-    console.log(data);
 
     successCallBack(data);
   }

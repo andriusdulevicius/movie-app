@@ -9,9 +9,9 @@ class AppAddPost extends Component {
     },
   };
 
-  handleChange = (event) => {
+  handleChange = (e) => {
     const newPostCopy = { ...this.state.newPost };
-    newPostCopy[event.target.name] = event.target.value;
+    newPostCopy[e.target.name] = e.target.value;
 
     this.setState({ newPost: newPostCopy });
   };
@@ -19,7 +19,7 @@ class AppAddPost extends Component {
   sendAddPost = (e) => {
     e.preventDefault();
     this.props.onAddPost(this.state.newPost);
-    this.setState({ newPost: { title: '', author: '', text: '' } });
+    e.target.reset();
   };
 
   render() {

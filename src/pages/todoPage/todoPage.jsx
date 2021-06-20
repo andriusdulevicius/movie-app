@@ -11,6 +11,7 @@ import './todo.css';
 class TodoPage extends Component {
   state = {
     todos: [],
+    filterTodos: [],
     isWarning: false,
     errors: {
       addTodo: '',
@@ -21,12 +22,21 @@ class TodoPage extends Component {
   componentDidMount() {
     this.getAllTodos();
   }
+  componentDidUpdate() {
+    console.log('filtered', this.state.filterTodos);
+  }
 
-  sortDoneTodos = () => {
-    this.setState({ todos: this.state.todos.filter((td) => td.isDone) });
+  sortDoneTodos = (isDoneOn) => {
+    console.log('done status', isDoneOn);
+    isDoneOn
+      ? this.setState({ filterTodos: this.state.todos.filter((td) => td.isDone) })
+      : this.setState({ filterTodos: [] });
   };
-  sortUndoneTodos = () => {
-    this.setState({ todos: this.state.todos.filter((td) => td.isDone === false) });
+  sortUndoneTodos = (isUndoneOn) => {
+    console.log('undone status', isUndoneOn);
+    isUndoneOn
+      ? this.setState({ filterTodos: this.state.todos.filter((td) => !td.isDone) })
+      : this.setState({ filterTodos: [] });
   };
 
   checkToggle = (id, doneStatus) => {
@@ -99,8 +109,9 @@ class TodoPage extends Component {
     return (
       <div className='todo-page'>
         <AppHeader />
-        <SortTodos sortDoneTodos={this.sortDoneTodos} sortUnDoneTodos={this.sortUndoneTodos} />
+        <SortTodos sortDoneTodos={this.sortDoneTodos} sortUndoneTodos={this.sortUndoneTodos} />
         <AppList
+          filterTodos={this.state.filterTodos}
           todos={this.state.todos}
           onToggle={this.checkToggle}
           onFavToggle={this.checkFavToggle}

@@ -8,6 +8,7 @@ class PostPage extends Component {
   state = {
     Posts: [],
     isWarning: false,
+    isEditOn: false,
   };
 
   componentDidMount() {
@@ -27,42 +28,47 @@ class PostPage extends Component {
   };
 
   handleAddPost = (newPost) => {
-    // this.toggleWarning(title);
+    // this.toggleWarning(newPost.title);
     GetSendData.addNewPost(newPost, () => {
       this.getAllPosts();
     });
   };
 
   toggleEdit = (blogPost) => {
-    if (blogPost.title.length < 3 || blogPost.title !== String) {
-      this.setState({ isWarning: true });
-      return;
-    } else {
-      this.setState({ isWarning: false });
-      GetSendData.editPost(blogPost, () => {
-        this.getAllPosts();
-        this.setState({ author: blogPost.author, title: blogPost.title, text: blogPost.newText });
-      });
-    }
+    // if (blogPost.title.length < 3 || blogPost.title !== String) {
+    //   this.setState({ isWarning: true });
+    //   return;
+    // } else {
+    //   this.setState({ isWarning: false });
+    this.setState({ isEditOn: true });
+    GetSendData.editPost(blogPost, () => {
+      this.getAllPosts();
+      this.setState({ author: blogPost.author, title: blogPost.title, text: blogPost.newText });
+    });
   };
 
-  toggleWarning = (PostTitle) => {
-    if (PostTitle.length < 1) {
-      this.setState({ isWarning: true });
-      return;
-    } else this.setState({ isWarning: false });
-  };
+  // toggleWarning = (PostTitle) => {
+  //   if (PostTitle.length < 3) {
+  //     this.setState({ isWarning: true });
+  //     return;
+  //   } else this.setState({ isWarning: false });
+  // };
 
-  showWarning = () => {
-    return this.state.isWarning ? 'warning-message warning-db' : 'warning-message';
-  };
+  // showWarning = () => {
+  //   return this.state.isWarning ? 'warning-message warning-db' : 'warning-message';
+  // };
 
   render() {
     return (
       <div className='container'>
         <h2>Our blog Posts:</h2>
         <AppAddPost onAddPost={this.handleAddPost} />
-        <PostList onDelete={this.handleDelete} posts={this.state.Posts} />
+        <PostList
+          onDelete={this.handleDelete}
+          posts={this.state.Posts}
+          onEdit={this.toggleEdit}
+          editStatus={this.state.isEditOn}
+        />
       </div>
     );
   }

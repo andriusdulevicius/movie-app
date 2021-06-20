@@ -6,7 +6,7 @@ class HomePage extends Component {
     return (
       <div className='container'>
         <h1>Home page</h1>
-        <p className='paragraph'> This is a full MERN stack prodect with all CRUD operations in working order.</p>
+        <p className='paragraph'> This is a full MERN stack project with all CRUD operations in working order.</p>
       </div>
     );
   }
