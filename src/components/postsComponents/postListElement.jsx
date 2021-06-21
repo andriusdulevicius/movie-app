@@ -16,22 +16,20 @@ class PostListElement extends Component {
   spanOrInput() {
     const { title, author, text } = this.props.Post;
     if (this.props.editStatus) {
-      return (
-        <>
-          <input className='card-title' name='title' value={title} />
-          <input className='text-muted' name='author' value={author} />
-          <input className='card-text' name='text' value={text} />
-        </>
-      );
-    } else {
-      return (
-        <>
-          <h5 className='card-title'>{title}</h5>
-          <h6 className='text-muted'>{author}</h6>
-          <p className='card-text'>{text}</p>
-        </>
-      );
+      <React.Fragment>
+        <input className='card-title' name='title' value={title} />
+        <input className='text-muted' name='author' value={author} />
+        <input className='card-text' name='text' value={text} />
+      </React.Fragment>;
     }
+
+    return (
+      <React.Fragment>
+        <h5 className='card-title'>{title}</h5>
+        <h6 className='text-muted'>{author}</h6>
+        <p className='card-text'>{text}</p>
+      </React.Fragment>
+    );
   }
 
   render() {
